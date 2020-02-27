@@ -13,18 +13,25 @@ RUN yum upgrade --disableplugin=subscription-manager -y \
  RUN yum install --disableplugin=subscription-manager python2 -y
  RUN ln -s /usr/bin/python2 /usr/bin/python
 
+RUN npm -v
+
+COPY package*.json /project/
+COPY *.js /project/
+COPY user-app /project/user-app
+RUN rm -rf /project/user-app/node_modules && mkdir -p /project/user-app/node_modules
+
+RUN chown -hR root:0 /project
+
 # Install stack dependencies
 WORKDIR /project
-COPY ./package*.json ./
-RUN npm install --production
+RUN npm install --unsafe-perm --production
 
 # Install user-app dependencies
 WORKDIR /project/user-app
-COPY ./user-app/package*.json ./
-RUN npm install --production
+RUN npm install --unsafe-perm --production
 
-COPY . /project
-RUN chown -hR node:node /project
+RUN chown -hR node:0 /project \
+ && chmod -R g=u /project
 
 WORKDIR /project
 

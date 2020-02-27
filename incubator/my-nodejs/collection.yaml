@@ -1,0 +1,5 @@
+default-image: my-nodejs
+default-pipeline: my-nodejs-test-build-deploy-pipeline
+images:
+- id: my-nodejs
+  image: $IMAGE_REGISTRY_ORG/my-nodejs:0.3
