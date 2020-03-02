@@ -38,14 +38,14 @@ then
   github-release delete \
     --owner $GITHUB_USER \
     --repo collections \
-    --tag "0.2.1-custom" 
+    --tag "0.2.1-custom-buildah" 
 elif [[ $1 == "upload" ]]
 then
   github-release upload \
   --owner $GITHUB_USER \
   --repo collections \
-  --tag "0.2.1-custom" \
-  --name "0.2.1-custom" \
+  --tag "0.2.1-custom-buildah" \
+  --name "0.2.1-custom-buildah" \
   --body "Release of custom collection" \
   ci/release/*
 else
